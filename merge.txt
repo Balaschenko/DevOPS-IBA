@@ -1,3 +1,5 @@
 Gomel
 Minsk
 Brest
+Moskva
+Paris
