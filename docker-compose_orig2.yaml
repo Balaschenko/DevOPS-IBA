@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  httpd:
+    image: httpd
+    restart: always
+    ports:
+      - 8081:80
+  
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf 
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+      - httpd
+
+  db:
+    image: postgres
+    container_name: postgres-dev
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: df
+
+
+#  backend:
+#    build: 
+#      context: .
+

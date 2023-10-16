@@ -1,0 +1,1 @@
+docker run -d --name nginx-docker --mount source=hw6-vol,target=/usr/share/nginx/html -p 8081:80 nginx
