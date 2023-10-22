@@ -1,0 +1,11 @@
+[Unit]
+Description=GSecTLS to Connect to SMDO
+After=network.target
+
+[Service]
+
+ExecStart=/usr/local/sbin/GSecTLS
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
