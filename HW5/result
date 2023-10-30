@@ -1,0 +1,37 @@
+bdv@rl-deb:~/frontend$ docker build -t trahtata:v3 .
+Sending build context to Docker daemon  3.072kB
+Step 1/2 : FROM nginx
+ ---> 61395b4c586d
+Step 2/2 : ENTRYPOINT ["ls", "/usr"]
+ ---> Using cache
+ ---> 23765091f3d8
+Successfully built 23765091f3d8
+Successfully tagged trahtata:v3
+bdv@rl-deb:~/frontend$ cat Dockerfile
+FROM nginx
+
+ENTRYPOINT ["ls", "/usr"]
+
+
+bdv@rl-deb:~/frontend$ docker build -t trahtata:v3 .
+Sending build context to Docker daemon  3.072kB
+Step 1/2 : FROM nginx
+ ---> 61395b4c586d
+Step 2/2 : ENTRYPOINT ["ls", "/usr"]
+ ---> Using cache
+ ---> 23765091f3d8
+Successfully built 23765091f3d8
+Successfully tagged trahtata:v3
+bdv@rl-deb:~/frontend$ docker tag trahtata:v3 bdvbdv/huge:v3
+bdv@rl-deb:~/frontend$ docker push bdvbdv/huge:v3
+The push refers to repository [docker.io/bdvbdv/huge]
+d26d4f0eb474: Layer already exists
+a7e2a768c198: Layer already exists
+9c6261b5d198: Layer already exists
+ea43d4f82a03: Layer already exists
+1dc45c680d0f: Layer already exists
+eb7e3384f0ab: Layer already exists
+d310e774110a: Layer already exists
+v3: digest: sha256:a61e293e553fcc6e9c2667638abf486914c17d82cf51daa46fcc511928fbd4d3 size: 1778
+bdv@rl-deb:~/frontend$
+
