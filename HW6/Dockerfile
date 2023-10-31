@@ -1,5 +1,1 @@
 FROM nginx:alpine
-
-
-
-
