@@ -1,0 +1,17 @@
+- name: Create user with home dir
+  hosts: ans.efr
+
+  tasks:
+    - name: Create user
+      ansible.builtin.user:
+        name: dmitry
+        password: "{{ 'ASDF1234' | password_hash('sha512') }}"
+        uid: 1100
+        expires: -1
+        shell: /bin/bash
+        group: "27"
+        groups: ast
+        create_home: true
+        home: /home/dmitry
+        shell: /bin/bash
+
