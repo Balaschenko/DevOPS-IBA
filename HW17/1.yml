@@ -7,7 +7,7 @@
   tasks:
     - name: create ec2
       amazon.aws.ec2_instance:
-        name: 'ds2'
+        name: 'dmitry_ec2'
         image_id: "{{ ami }}"
         instance_type: "{{ instance_type }}"
         key_name: "{{key}}"
@@ -78,7 +78,8 @@
   tasks:
     - name: Terminate previously created EC2 instance
       ec2_instance:
-        instance_ids: "{{ ec2.instances }}"
+        filters:
+          tag:type: docker
         state: absent
         wait: yes
 
