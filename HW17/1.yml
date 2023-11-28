@@ -1,0 +1,84 @@
+- name: EC2 && Docker
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - docker_vars.yml
+
+  tasks:
+    - name: create ec2
+      amazon.aws.ec2_instance:
+        name: 'ds2'
+        image_id: "{{ ami }}"
+        instance_type: "{{ instance_type }}"
+        key_name: "{{key}}"
+        network:
+          assign_public_ip: true
+        tags:
+          type: docker
+          env: prod
+
+        wait: true
+      register: ec2
+
+    - name: Wait for EC2 instance to be ready
+      wait_for:
+        host: "{{ item.public_dns_name}}"
+        port: 22
+        search_regex: OpenSSH
+        delay: 30
+      loop: "{{ ec2.instances}}"
+      register: wait
+
+    - name: Add EC2 to Docker Group
+      add_host:
+        hostname: "{{ item.public_dns_name }}"
+        groupname:
+          - docker
+      loop: "{{ ec2.instances }}"
+
+
+- name: Install Docker
+  hosts: docker
+  become: true
+  gather_facts: false
+  remote_user: ubuntu
+
+  tasks:
+    - name: Update
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install python-is-python3
+      apt: 
+        name: python-is-python3
+        state: latest
+    - name: pip3
+      apt: 
+        name: python3-pip
+        state: latest
+
+
+### install Docker 
+    - command: curl -fsSL https://get.docker.com -o get-docker.sh
+    - command: sudo sh ./get-docker.sh
+    - command: sudo usermod -aG docker ubuntu
+
+    - name: "Start Docker Service"
+      service:
+        name: "docker"
+        state: started
+
+    - command: docker pull nginx
+
+    - name: Expand a container
+      command: docker run -d -p 8080:80 --rm nginx
+
+- name: Terminate EC2
+  hosts: localhost
+  tasks:
+    - name: Terminate previously created EC2 instance
+      ec2_instance:
+        instance_ids: "{{ ec2.instances }}"
+        state: absent
+        wait: yes
+

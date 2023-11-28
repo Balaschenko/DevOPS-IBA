@@ -1,0 +1,5 @@
+instance_type: t3.micro
+key: devops
+ami: ami-0fc5d935ebf8bc3bc
+ansible_python_interpreter: /bin/python3
+
