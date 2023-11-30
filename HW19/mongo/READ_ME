@@ -1,0 +1,9 @@
+https://habr.com/ru/companies/otus/articles/726914/
+
+$ kubectl apply -f mongo-config-map.yml
+
+$ kubectl apply -f mongo.yml
+
+
+aws eks update-kubeconfig --name dmitry-eks
+
