@@ -28,7 +28,12 @@ module "eks" {
       name = "dmitry-node-group"
 
       instance_types = ["t3.medium"]
-
+      
+      capacity_type ="ON_DEMAND"
+      update_config = {
+        max_unavailable_percentage = 50
+      }
+      
       min_size     = 1
       max_size     = 3
       desired_size = 1
