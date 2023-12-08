@@ -50,11 +50,11 @@ jobs:
 #        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
     - name: Terraform init
-        run: terraform init
-        working-directory: ${{ env.working-directory }}
+      run: terraform init
+      working-directory: ${{ env.working-directory }}
 
     - name: TF
-        run: terraform apply
-        working-directory: ${{ env.working-directory }}
+      run: terraform apply
+      working-directory: ${{ env.working-directory }}
 
         
