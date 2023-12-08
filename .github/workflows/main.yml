@@ -17,7 +17,7 @@ jobs:
     
     - name: ls -l
       run: ls -l
-      run: cd Exam
-      run: ls -l
+      cd Exam
+      ls -l
       
       
