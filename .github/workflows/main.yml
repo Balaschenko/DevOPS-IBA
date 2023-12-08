@@ -54,7 +54,7 @@ jobs:
       working-directory: ${{ env.working-directory }}
 
     - name: TF
-      run: terraform apply
+      run: terraform apply -auto-approve -input=false
       working-directory: ${{ env.working-directory }}
 
         
