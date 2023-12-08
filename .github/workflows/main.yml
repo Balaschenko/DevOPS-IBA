@@ -17,8 +17,7 @@ jobs:
     
     - name: ls -l
       run: ls -l
-
-    - name: Print TF Version
-      run: terraform --version
-
+      run: cd Exam
+      run: ls -l
+      
       
