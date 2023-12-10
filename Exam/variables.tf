@@ -1,4 +1,12 @@
-variable "cidr" {
+variable "region" {
+  description = "AWS region"
   type        = string
-  default     = "10.0.0.0/16"
+  default     = "us-east-1"
 }
+
+variable "owner" {
+  description = "Owner"
+  type        = string
+  default     = "dmitry"
+}
+
