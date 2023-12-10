@@ -10,6 +10,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      working-directory: "Exam"
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Git clone my repo
@@ -46,3 +48,13 @@ jobs:
 #        echo "Pushing image to ECR..."
 #        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 #        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+    - name: Terraform init
+      run: terraform init
+      working-directory: ${{ env.working-directory }}
+
+    - name: TF
+      run: terraform apply -auto-approve -input=false
+      working-directory: ${{ env.working-directory }}
+
+        
